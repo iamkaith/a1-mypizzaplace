@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Kae's Pizza Place</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Kae's Pizza Place</h1>
+    </header>
+
+    <!-- display errors here --> 
+    <div>
+
+    </div>
+
+    <section class="container">
+        <h2>Your Pizza Order</h2>
+        <p>Fill out the order form below to place your order. </p>
+
+        <form action="/" method="POST">
+            <span>Pick your size:</span>
+            <select name="size">
+                <option name="size1" value="<%= size1 %>"><%= size1 %>
+                <option name="size2" value="<%= size2 %>"><%= size2 %>
+                <option name="size3" value="<%= size3 %>"><%= size3 %>
+            </select>
+            
+            <br><br>
+
+            <span>Pick your favourite crust:</span>
+            <select name="crust">
+                <option name="crust1" value="<%= crust1 %>"><%= crust1 %>
+                <option name="crust2" value="<%= crust2 %>"><%= crust2 %>
+            </select>
+
+            <br><br>
+
+            <p>Pick your topping:</p>
+            
+            <input type="checkbox" name="topping" value="<%= topping1 %>"><%= topping1 %>
+            <input type="checkbox" name="topping" value="<%= topping2 %>"><%= topping2 %>
+            <input type="checkbox" name="topping" value="<%= topping3 %>"><%= topping3 %>
+            <input type="checkbox" name="topping" value="<%= topping4 %>"><%= topping4 %>
+            
+            
+            <br><br>
+
+            <span>Quantity:</span>
+            <input type="text" name="qty" size=1 required>
+
+            <h2>Delivery Details</h2>
+            <span>Phone Number:</span>
+            <input type="text" name="phone" size=10 placeholder="123-456-7890" required>
+            <br>
+
+            <p>Address:</p>
+            <input type="text" name="apt" size=3 placeholder="apt#" required>
+            <input type="text" name="street" size=20 placeholder="Awesome St" required>
+            <input type="text" name="postal" size=7 placeholder="A1C 2E3" required>
+
+            <p>Email:</p>
+            <input type="text" name="email" size=30 placeholder="youareawesome@awesome.com" required>
+
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    
+
+</body>
+</html>

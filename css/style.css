@@ -1,0 +1,40 @@
+body {
+	font-family: sans-serif;
+	background-color: #ddd;
+	margin: auto;
+}
+
+header h1 {
+	background-color: orange;
+	color: white;
+	margin: auto;
+	padding-bottom: 1em;
+}
+
+h1 {
+	background-color: orange;
+	color: white;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+}
+
+h2 {
+	color: maroon;
+	font-weight: bold;
+	font-size: 125%;
+}
+
+
+section {
+	padding-left: 1em;
+}
+
+.container {
+	background-color: white;
+	width: 50%;
+	margin: auto;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+}
