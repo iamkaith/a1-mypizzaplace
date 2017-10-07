@@ -4,25 +4,27 @@ const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
-const jsonfile = require("jsonfile");
+const jsonfile = require('jsonfile');
+const priceCalc = require('./priceCalculator.js')
 
-const port = 8080;
+const port = 3000;
 
 var config = require(__dirname + "/pizza.json");
+const timeStamp = new Date().getTime().toString();
 
 const app = express();
 
 // uses
 app.use(serveStatic(__dirname, + "/css"));
 app.use(serveStatic(__dirname, + "/js"));
+app.use(serveStatic(__dirname, + "/util"));
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator());
-
 
 // create view
 app.set("view engine", "ejs");
 
-// map form 
+// home GET
 app.get('/', function(req, res){
 
     // fill out the menu form
@@ -35,49 +37,75 @@ app.get('/', function(req, res){
         topping1: config.topping1,
         topping2: config.topping2,
         topping3: config.topping3,
-        topping4: config.topping4,
-        errors: null
+        topping4: config.topping4
     });
   });
 
 
 // POST
-app.post('/', [
+app.post('/', [ 
     check("phone", "Phone number invalid").exists().trim(),
     check("apt").isAlphanumeric().trim(),
-    check("street").exists("en-CA").trim(),
+    check("street").exists().trim(),
     check("postal").isPostalCode("CA").trim(),
     check("email").isEmail(),
     check("size").isAlpha(),
     check("crust").isAlpha(),
     check("topping").exists(),
     check("qty").isNumeric().trim().toInt()  
-  ], (req, res, next) => {
+  ], function (req, res, next) {  
     
     const error = req.validationErrors(req);
     
+    // redirect to error page
     if(error) {
-        console.log("There were form validation errors!")
-        console.log(error)
-        return errors;
+        console.log("There were form validation errors!");
+        console.log(error);
+        res.redirect('error');
     }
     
+    // write to file, redirect to confirmation page
     if(!error) {
         let pizzaOrder = matchedData(req);
         
-        var fileName = "./orders/data" + new Date().getTime() + ".json"; 
-        var fileIO = jsonfile.writeFile(fileName, pizzaOrder, function(err) {
+        //var timeStamp = new Date().getTime().toString();
+        console.log(timeStamp)
+        var fileName = "./orders/data" + timeStamp + ".json"; 
+        let fileOut = jsonfile.writeFile(fileName, pizzaOrder, function(err) {
             if(err) {
                 console.log("Error writing to file!")
                 console.log(err);
             }
-
-            res.render('order')
-
         })
+        res.redirect('order');
     }    
 })
 
+// order confirmation page
+app.get('/order', function(req, res){
+    
+    var fileIn = require(__dirname + '/orders/data' + timeStamp + '.json')
+    
+    // let calculator = new priceCalc(fileIn.size, fileIn.topping);
+
+    res.render('order', {
+        email: fileIn.email,
+        qty: fileIn.qty,
+        size: fileIn.size,
+        crust: fileIn.crust,
+        topping: fileIn.topping,
+        apt: fileIn.apt,
+        street: fileIn.street,
+        postal: fileIn.postal,
+        phone: fileIn.phone
+        //subtotal: calculator.calculateSubtotal(),
+        //tax: calculator.calculateTax(),
+        //final: calculator.calculateTotal()
+    })
+
+})
+
+
 app.listen(port, function ready () {
-    console.log("Hi, I am waiting for requests on port 8080....");
+    console.log("Hi, I am waiting for requests on port " + port);
 });

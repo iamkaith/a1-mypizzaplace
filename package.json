@@ -4,7 +4,7 @@
   "description": "Assignment 1 for Comp 2912. Creating a 2 page website for ordering pizza ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Kae Ramirez A00923169",
   "license": "ISC",
