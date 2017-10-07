@@ -1,0 +1,21 @@
+{
+  "name": "assignment1",
+  "version": "1.0.1",
+  "description": "Assignment 1 for Comp 2912. Creating a 2 page website for ordering pizza ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kae Ramirez A00923169",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.1",
+    "express-validator": "^4.2.1",
+    "fs": "0.0.1-security",
+    "jsonfile": "^4.0.0",
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {}
+}

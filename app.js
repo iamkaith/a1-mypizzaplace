@@ -14,6 +14,7 @@ const app = express();
 
 // uses
 app.use(serveStatic(__dirname, + "/css"));
+app.use(serveStatic(__dirname, + "/js"));
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use(expressValidator());
 
@@ -42,8 +43,8 @@ app.get('/', function(req, res){
 
 // POST
 app.post('/', [
-    check("phone", "Phone number invalid").isMobilePhone("en-CA").trim(),
-    check("apt").exists().trim(),
+    check("phone", "Phone number invalid").exists().trim(),
+    check("apt").isAlphanumeric().trim(),
     check("street").exists("en-CA").trim(),
     check("postal").isPostalCode("CA").trim(),
     check("email").isEmail(),
@@ -53,25 +54,30 @@ app.post('/', [
     check("qty").isNumeric().trim().toInt()  
   ], (req, res, next) => {
     
-    const error = validationErrors(req);
-    if(!error.isEmpty()) {
+    const error = req.validationErrors(req);
+    
+    if(error) {
         console.log("There were form validation errors!")
         console.log(error)
+        return errors;
     }
     
-    let pizzaOrder = matchedData(req);
-    
-    var fileName = "./orders/data" + new Date().getMilliseconds() + ".json"; 
-    var fileIO = jsonfile.writeFile(fileName, pizzaOrder, function(err) {
-        if(err) {
-            console.log("Error writing to file!")
-            console.log(err);
-        }
-    })
-    
+    if(!error) {
+        let pizzaOrder = matchedData(req);
+        
+        var fileName = "./orders/data" + new Date().getTime() + ".json"; 
+        var fileIO = jsonfile.writeFile(fileName, pizzaOrder, function(err) {
+            if(err) {
+                console.log("Error writing to file!")
+                console.log(err);
+            }
+
+            res.render('order')
+
+        })
+    }    
 })
 
-
 app.listen(port, function ready () {
-    console.log("I am waiting for requests on port 8080....");
+    console.log("Hi, I am waiting for requests on port 8080....");
 });
