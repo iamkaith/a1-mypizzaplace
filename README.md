@@ -11,6 +11,17 @@ Kae Ramirez
 A00923169
 
 ## Instructions ##
-1. node_modules is not included so open up cmd in the root and npm install
-2. use npm start to launch the application
+1. node_modules is not included, please use npm install
+2. type in node app.js to launch application
 3. Chrome is preferred browser
+
+### What doesn't wasn't fully implemented ###
+- priceCalculator is coming up as undefined when calling a function (though I think I followed the module.exports format properly)
+- pricing is not shown on order confirmation page
+- validation errors will not show up on index.ejs but instead direct user to an error page 
+
+### What I would change like to change in the future ### 
+- separate the application logic some more. I feel like app.js file should be more like a controller, delegating the requests and responses to separate areas of the application to be processed and contain less logic
+
+### Final thoughts ###
+Lots of self study but learnt a lot. Looking forward to applying the knowledge gained for assignment 2 and prepare for the final.
