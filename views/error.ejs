@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <%- include('headcontent.ejs') %>
 </head>
 
 
 <body>
     <div class="container">
-        <ul class="nav nav-tabs">
-            <li><a href="/">Place Your Order</a></li>
-            <li><a href="/orders">Orders</a></li>
-        </ul>
+        <%- include('header.ejs') %>
+        <nav class="navbar navbar-dark bg-dark navbar-expand">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                            <li class="active nav-item"><a href="/" class="nav-link">Place Your Order</a></li>
+                            <li class="nav-item"><a href="/orders" class="nav-link">Orders List</a></li>
+                    </ul>
+                </div>
+            </nav>
 
         <h1><%= error.status %> <%= message %></h1>
         <p>We're sorry, something went wrong! Use the navigation menu above to navigate where you want to go.</p>
@@ -20,4 +24,5 @@
         <pre><%= error.stack %></pre>
     </div>
 </body>
+<%- include('scripts.ejs') %>
 </html>

@@ -7,9 +7,18 @@ var bodyParser = require('body-parser');
 const expressValidator = require("express-validator");
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
-
+var mongoose = require('mongoose');
 
 var orders = require('./routes/orders');
+
+//Set up connection to MongoDB
+var mongoUrl = 'mongodb://localhost/kaer';
+mongoose.connect(mongoUrl, function (err) {
+  if (err) {
+    console.log("Error connecting to MongoDB");
+    process.exit(1);
+  }
+});
 
 var app = express();
 
@@ -29,7 +38,13 @@ app.use(expressValidator());
 // order page
 app.use('/', orders);
 
-
+//Clean up the connection when cntrl+c is pressed
+process.on('SIGINT', function () {
+  mongoose.connection.close(function () {
+    console.log("Closing the mongodb connection");
+    process.exit(0);
+  });
+});
 
 
 // catch 404 and forward to error handler

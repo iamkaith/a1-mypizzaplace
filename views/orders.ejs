@@ -3,30 +3,42 @@
 
 <head>
     <title> <%= title %> </title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <%- include('headcontent.ejs') %>
 </head>
 
 <body>
     <div class="container">
-        <h1> <%= title %> </h1>
-
-        <ul class="nav nav-tabs">
-            <li><a href="/">Place Your Order</a></li>
-            <li class="active"><a href="/">Orders List</a></li>
-        </ul>
+        <%- include('header.ejs') %>
+        <nav class="navbar navbar-dark bg-dark navbar-expand">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                            <li class="nav-item"><a href="/" class="nav-link">Place Your Order</a></li>
+                            <li class="active nav-item"><a href="/orders" class="nav-link">Orders List</a></li>
+                    </ul>
+                </div>
+        </nav>
 
         <!-- order list -->
         <br/>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped table-bordered table-hover table-condensed" id="orders">
-
-                </table>
-            </div>
+        <table class="table table-striped ">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Size</th>
+                <th scope="col">Crust</th>
+                <th scope="col">Toppings</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Amount</th>
+            </thead>
+            <tbody id="orders">
+                <!-- populate orders from db -->
+            </tbody>
+        </table>
 </body>
+<%- include('scripts.ejs') %>
+
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="javascripts/myOrders.js"></script>
 
 </html>

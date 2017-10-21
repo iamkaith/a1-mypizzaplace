@@ -2,10 +2,12 @@ $(function ready() {
     $("#submitForm").submit(function (event) {
         event.preventDefault();
 
+        console.log("i'm processing the form");
+
         var newOrder = JSON.stringify({
-            size: $('.size').val(),
-            crust: $('.crust').val(),
-            topping: $('.topping:checked').map(function() { //all checked toppings
+            size: $('.size:checked').val(),
+            crust: $('.crust:checked').val(),
+            topping: $('.topping:checked').map(function() { 
                 return this.value + " ";
             }).get(),
             name: $('#firstName').val() + " " + $('#lastName').val(),
@@ -13,17 +15,9 @@ $(function ready() {
             city: $('#city').val(),
             postal: $('#postal').val(),
             phone: $('#phone').val(),
-            email: $('#email').val()
-
-
-            /*
-            contact: $('.contact:text').map(function() { // contact information
-                return this.value + " ";
-            })
-            */
+            email: $('#email').val(),
+            amount: 0 // just initial value
         });
-
-        console.log("index.js " + newOrder);
 
         $.ajax({
             url: '/api/order',
@@ -32,18 +26,15 @@ $(function ready() {
             dataType: 'json',
             data: newOrder,
             success: function (json, status, request) {
-                //$('#cost').addClass('alert alert-success');
-                $('#statusMsg').html('Added the order');
                 $('#statusMsg').removeClass();
                 $('#statusMsg').addClass('alert alert-success');
-                $('#statusMsg').html('Added the order');
+                $('#statusMsg').html('Success! Your order has saved!');
             },
 
             error: function (request, status) {
                 $('#statusMsg').removeClass();
                 $('#statusMsg').addClass('alert alert-danger');
-                $('#statusMsg').html('Error adding the order, please refresh the page and try again');
-                console.log('Request failed : ', status);
+                $('#statusMsg').html('Sorry! There was a problem with your pizza order. Please check your order form again!');
             }
         });
 
