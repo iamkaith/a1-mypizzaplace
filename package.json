@@ -1,18 +1,18 @@
 {
-  "name": "assignment1",
-  "version": "1.0.1",
-  "description": "Assignment 1 for Comp 2912. Creating a 2 page website for ordering pizza ",
-  "main": "app.js",
-  "author": "Kae Ramirez A00923169",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "ejs": "^2.5.7",
-    "express": "^4.16.1",
-    "express-validator": "^4.2.1",
-    "fs": "0.0.1-security",
-    "jsonfile": "^4.0.0",
-    "normalize.css": "^7.0.0"
+  "name": "npm",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "^4.15.5",
+    "express-validator": "^4.2.1",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  }
 }
