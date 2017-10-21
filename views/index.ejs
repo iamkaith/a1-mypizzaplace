@@ -1,57 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <%- include('head.ejs')%>
-    <title>Kae's Pizza Place</title>
+    <title> <%= title %> </title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
+
 <body>
-    <%- include('banner.ejs') %>
     <div class="container">
-        <h2>Place your pizza order: </h2>
-        <p>Fill out the order form below to order your delicious pizza(s)!</p>
+        <h1> <%= title %> </h1>
 
-        <!-- form -->
-        <form action="/" method="POST">
-            <span>Pick your size:</span>
-            <select name="size">
-                <option name="size1" value="<%= size1 %>"><%= size1 %>
-                <option name="size2" value="<%= size2 %>"><%= size2 %>
-                <option name="size3" value="<%= size3 %>"><%= size3 %>
-            </select> 
-            <br> 
-            
-                <span>Pick your favourite crust:</span>
-            <select name="crust">
-                <option name="crust1" value="<%= crust1 %>"><%= crust1 %>
-                <option name="crust2" value="<%= crust2 %>"><%= crust2 %>
-            </select>   
-            <br>   
-            <span>Pick your topping:</span>               
-            <input type="checkbox" name="topping" value="<%= topping1 %>"><%= topping1 %>
-            <input type="checkbox" name="topping" value="<%= topping2 %>"><%= topping2 %>
-            <input type="checkbox" name="topping" value="<%= topping3 %>"><%= topping3 %>
-            <input type="checkbox" name="topping" value="<%= topping4 %>"><%= topping4 %>                
-            <br><br>
-            <span>Quantity:</span>
-            <input type="text" name="qty" size=1 required>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/">Place Your Order</a></li>
+            <li><a href="/orders">Orders List</a></li>
+        </ul>
 
-        <h2>Delivery Details</h2>
-            <span>Phone Number:</span>
-            <input type="text" name="phone" size=10 placeholder="123-456-7890" required>
-            <br>   
+        <br/>
+        <div class="row">
+            <div class="col-md-6">
 
-            <span>Address:</span>
-            <input type="text" name="apt" size=3 placeholder="apt#" required>
-            <input type="text" name="street" size=20 placeholder="Awesome St" required>
-            <input type="text" name="postal" size=7 placeholder="A1C 2E3" required>
-            <br>
+                <h2>Your Pizza</h2>
+                <form method="post" id="submitForm">
+                    <!-- size --> 
+                    <div class="form-check">
+                        <label class="form-check-label">Pick your size: </label><br>
+                        <input type="radio"  class="form-check-input size" name="size" value="small" required>Small<br>
+                        <input type="radio"  class="form-check-input size" name="size" value="medium" required>Medium<br>
+                        <input type="radio"  class="form-check-input size" name="size" value="large" required>Large<br>
+                    </div>
 
-            <span>Email:</span>
-            <input type="text" name="email" size=30 placeholder="youareawesome@awesome.com" required>   
-            <br><br>
-            <input type="submit" value="Submit">
-        </form>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+                    <br>
+                    <!-- crust --> 
+                    <div class="form-check">
+                        <label for="title">Pick your crust:</label><br>
+                        <input type="radio"  class="form-check-input crust" name="crust" value="regular" required>Regular<br>
+                        <input type="radio"  class="form-check-input crust" name="crust" value="thin" required>Thin<br>
+                    </div>
+
+                    <!-- toppings -->
+
+                    <br>
+                    <div class="form-check">
+                        <label for="title">Pick your toppings:</label><br>
+                        <input type="checkbox" class="form-check-input topping" name="topping" value="cheese">Cheese<br>
+                        <input type="checkbox" class="form-check-input topping" name="topping" value="mushroom">Mushroom<br>
+                        <input type="checkbox" class="form-check-input topping" name="topping" value="pepperoni">Pepperoni<br>
+                        <input type="checkbox" class="form-check-input topping" name="topping" value="sausage">Sausage<br>
+                        <input type="checkbox" class="form-check-input topping" name="topping" value="chicken">Chicken<br>
+                    </div>
+                    
+
+                    <!-- customer information --> 
+                    <h2>Delivery and Contact Information</h2>
+                    <div class="form-group">
+                            <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                      <label for="firstName">First Name</label>
+                                      <input type="text" class="form-control firstName" id="firstName" name="firstName" placeholder="First Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                      <label for="lastName">Last Name</label>
+                                      <input type="text" class="form-control lastName" id="lastName" name="lastName" placeholder="Last Name">
+                                    </div>
+                            </div>
+                        
+                            <div class="form-group col-md-12">
+                                <label for="address1">Address</label>
+                                <input type="text" class="form-control address1" id="address1" name="address1" placeholder="1234 Main St">
+                            </div>
+
+                            <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                            <label for="city">City</label>
+                                            <input type="text" class="form-control city" id="city" name="city">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                            <label for="postal">Postal Code</label>
+                                            <input type="text" class="form-control postal" id="postal" name="postal" placeholder="V5G 3H2">
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" class="form-control phone" id="phone" name="phone" placeholder="123-456-7890">
+                                </div>
+                                <div class="form-group col-md-12">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control email" id="email" name="email" placeholder="email@email.com">
+                                </div>
+                            
+                    </div>
+
+
+                    <div id="cost">
+                    </div>
+
+                    <!-- submit --> 
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="form-group margin-bottom-10">
+                    </div>
+
+                    <div id="statusMsg">
+                    </div>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="javascripts/myIndex.js"></script>
+
 </html>

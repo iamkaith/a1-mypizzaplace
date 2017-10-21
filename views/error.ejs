@@ -1,19 +1,23 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
-    <%- include('head.ejs') %>
-    <title>Whoops! </title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
+
 <body>
-<%- include('banner.ejs') %>
-<div class="container">  
-    <div class="panel panel-info" >
-        <div class="panel-heading"><h3 class="panel-title">Could you please redo your order?</h3></div>
-        <div class="panel-body">
-            <p>Unfortunately something went wrong.</p>
-        </div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li><a href="/">Place Your Order</a></li>
+            <li><a href="/orders">Orders</a></li>
+        </ul>
+
+        <h1><%= error.status %> <%= message %></h1>
+        <p>We're sorry, something went wrong! Use the navigation menu above to navigate where you want to go.</p>
+
+        <br>
+        <pre><%= error.stack %></pre>
     </div>
-</div>
 </body>
 </html>
